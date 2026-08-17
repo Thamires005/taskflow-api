@@ -1,0 +1,32 @@
+# Lista de serviços que serão criados pelo Docker
+services:
+
+  # Serviço responsável pelo banco de dados
+  postgres:
+
+    # Imagem oficial do PostgreSQL na versão 16
+    image: postgres:16
+
+    # Nome do container
+    container_name: taskflow-postgres
+
+    # Variáveis de ambiente utilizadas pelo PostgreSQL
+    environment:
+      POSTGRES_DB: taskflow_db
+      POSTGRES_USER: taskflow_user
+      POSTGRES_PASSWORD: taskflow_password
+
+    # Mapeamento de portas
+    ports:
+      - "5432:5432"
+
+    # Volume para persistência dos dados (persiste os dados no banco)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    # Reinicia automaticamente o container
+    restart: unless-stopped
+
+# Volume persistente do PostgreSQL
+volumes:
+  postgres_data:
