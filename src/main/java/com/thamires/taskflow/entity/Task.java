@@ -1,5 +1,8 @@
 package com.thamires.taskflow.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import jakarta.persistence.PrePersist;
 
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -23,7 +26,7 @@ public class Task {
     private Long id;
 
     private String title;
-    
+
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -33,5 +36,17 @@ public class Task {
     @Enumerated(EnumType.STRING)
     @Column(name = "priority", nullable = false)
     private TaskPriority priority;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "due_date")
+    private LocalDate dueDate;
+
+    //método gera createdAt automaticamente
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = LocalDateTime.now();
+    }
 
 }
