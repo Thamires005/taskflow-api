@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import jakarta.persistence.PrePersist;
 
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import jakarta.persistence.Id;
 
 import com.thamires.taskflow.enums.TaskPriority;
@@ -19,6 +21,8 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "tasks")
+@Getter
+@Setter
 public class Task {
 
     @Id
