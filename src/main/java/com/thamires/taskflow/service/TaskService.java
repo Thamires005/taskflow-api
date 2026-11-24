@@ -7,6 +7,8 @@ import com.thamires.taskflow.dto.response.TaskResponseDTO;
 import com.thamires.taskflow.entity.Task;
 import com.thamires.taskflow.enums.TaskStatus;
 import com.thamires.taskflow.repository.TaskRepository;
+import com.thamires.taskflow.exception.TaskNotFoundException;
+import java.util.List;
 
 @Service
 public class TaskService {
@@ -29,14 +31,32 @@ public class TaskService {
 
         Task savedTask = taskRepository.save(task);
 
+        return toResponseDTO(savedTask);
+
+    }
+    public List<TaskResponseDTO> findAllTasks() {  //lista todas as tarefas
+        return taskRepository.findAll()
+            .stream()
+            .map(this::toResponseDTO)
+            .toList();
+    }
+
+    public TaskResponseDTO findTaskById(Long id) {  //busca uma tarefa por ID
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException(id));
+
+        return toResponseDTO(task);
+    }
+
+    private TaskResponseDTO toResponseDTO(Task task) {  //método privado que faz a conversão Entidade -> DTO
         return new TaskResponseDTO(
-                savedTask.getId(),
-                savedTask.getTitle(),
-                savedTask.getDescription(),
-                savedTask.getStatus(),
-                savedTask.getPriority(),
-                savedTask.getCreatedAt(),
-                savedTask.getDueDate()
+                task.getId(),
+                task.getTitle(),
+                task.getDescription(),
+                task.getStatus(),
+                task.getPriority(),
+                task.getCreatedAt(),
+                task.getDueDate()
         );
-     }
+    }
 }
