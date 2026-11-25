@@ -37,11 +37,11 @@ O TaskFlow permite gerenciar tarefas com as seguintes informações:
 - [x] Estrutura inicial do projeto
 - [x] Configuração do banco de dados com Docker
 - [x] Entidade `Task` com status e prioridade
-- [ ] Criar tarefa
-- [ ] Listar tarefas
-- [ ] Buscar tarefa por ID
-- [ ] Atualizar tarefa
-- [ ] Excluir tarefa
+- [x] Criar tarefa
+- [x] Listar tarefas
+- [x] Buscar tarefa por ID
+- [x] Atualizar tarefa
+- [x] Excluir tarefa
 - [ ] DTOs de request e response
 - [ ] Validação de dados
 - [ ] Tratamento de exceções
